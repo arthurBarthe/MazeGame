@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+###############################################
+#Application graphique de résolution de sudoku#
+#Arthur Guillaumin                            #
+###############################################
+import pygame, sys
+from random import choice, shuffle
+from Cemra import Camera
+from time import time
+
+class Animate:
+    def __init__(self, i_zoom, f_zoom, method='linear'):
+        self.inital_zoom = i_zoom
+        self.final_zoom = f_zoom
+        self.method = method
+        self.time_start = 0
+        self.duration = 0
+
+    def setInitial_zoom(self, v):
+        self.initial_zoom = v
+
+    def getInitial_zoom(self):
+        return self.initial_zoom
+
+    def setFinal_zoom(self, v):
+        self.final_zoom = v
+
+    def getFinal_zoom(self):
+        return self.final_zoom
+
+    def start_animation(self):
+        self.time_start = time()
+
+    def getCurrentZoom(self):
+        if self.method == 'linear':
+            p = (time()-self.time_start)/self.duration
+            if p <= 1:
+                diff = self.final_zoom _ self.initial_zoom
+                return self.initial_zoom + p*diff
+            else:
+                return self.final_zoom
